@@ -1,95 +1,148 @@
-📊 Sistema de Metas Jurisdicionais
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Metas Jurisdicionais</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        code {
+            background-color: #eaeaea;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #eaeaea;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        ul {
+            margin-left: 20px;
+        }
+        .tag {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
 
-Este projeto em Python tem como objetivo processar arquivos CSV contendo dados jurisdicionais, permitindo análises como consolidação, cálculo de metas, ranking de tribunais e filtragem por município.
+<div class="container">
 
-🚀 Funcionalidades
-📁 1. Concatenar arquivos
-Junta múltiplos arquivos CSV (teste_TRE*.csv)
-Gera:
-concatenado.csv
-🏙️ 2. Resumo por Municípios
-Agrupa por municipio_oj
-Calcula metas jurisdicionais
-Gera:
-resumo_municipios.csv
-🏛️ 3. Top 10 Tribunais
-Agrupa por sigla_tribunal
-Ordena pela Meta 1
-Gera:
-top_10_tribunais.csv
-🔍 4. Filtro por Município
-Filtra dados de um município específico
-Possui sugestão inteligente (busca parcial)
-Gera:
-NOME_DO_MUNICIPIO.csv
-⚙️ Tecnologias Utilizadas
-Python 3
-Pandas
-Glob
-Concurrent Futures (ThreadPoolExecutor e ProcessPoolExecutor)
-🧠 Lógica das Metas
+    <h1>📊 Sistema de Metas Jurisdicionais</h1>
 
-O sistema utiliza divisão segura para evitar erros:
+    <p>
+        Este projeto em Python tem como objetivo processar arquivos CSV contendo dados jurisdicionais,
+        permitindo análises como consolidação, cálculo de metas, ranking de tribunais e filtragem por município.
+    </p>
 
+    <h2>🚀 Funcionalidades</h2>
+
+    <h3>1. 📁 Concatenar arquivos</h3>
+    <ul>
+        <li>Junta múltiplos arquivos CSV (<code>teste_TRE*.csv</code>)</li>
+        <li>Gera: <code>concatenado.csv</code></li>
+    </ul>
+
+    <h3>2. 🏙️ Resumo por Municípios</h3>
+    <ul>
+        <li>Agrupa por <code>municipio_oj</code></li>
+        <li>Calcula metas jurisdicionais</li>
+        <li>Gera: <code>resumo_municipios.csv</code></li>
+    </ul>
+
+    <h3>3. 🏛️ Top 10 Tribunais</h3>
+    <ul>
+        <li>Agrupa por <code>sigla_tribunal</code></li>
+        <li>Ordena pela Meta 1</li>
+        <li>Gera: <code>top_10_tribunais.csv</code></li>
+    </ul>
+
+    <h3>4. 🔍 Filtro por Município</h3>
+    <ul>
+        <li>Busca município específico</li>
+        <li>Inclui sugestões inteligentes</li>
+        <li>Gera arquivo com nome do município</li>
+    </ul>
+
+    <h2>⚙️ Tecnologias</h2>
+    <ul>
+        <li><span class="tag">Python 3</span></li>
+        <li><span class="tag">Pandas</span></li>
+        <li><span class="tag">Glob</span></li>
+        <li><span class="tag">Concurrent Futures</span></li>
+    </ul>
+
+    <h2>🧠 Lógica das Metas</h2>
+    <p>O sistema utiliza divisão segura para evitar erro de divisão por zero:</p>
+
+    <pre><code>
 def divisao_segura(numerador, denominador, multiplicador=100):
     if denominador != 0:
         return (numerador / denominador) * multiplicador
     return 0
+    </code></pre>
 
-Metas calculadas:
+    <h2>⚡ Processamento Paralelo</h2>
+    <p>O sistema pode rodar em dois modos:</p>
+    <ul>
+        <li><b>Serial</b> → execução normal</li>
+        <li><b>Paralelo</b> → usando threads e processos</li>
+    </ul>
 
-Meta1
-Meta2A
-Meta2Ant
-Meta4A
-Meta4B
-⚡ Processamento Paralelo
-
-O sistema pode executar em dois modos:
-
-Serial → execução padrão
-Paralelo → utilizando:
-ThreadPoolExecutor (leitura de arquivos)
-ProcessPoolExecutor (processamento de dados)
-
-O ganho de desempenho (speedup) é exibido ao final de cada operação.
-
-📂 Estrutura Esperada
-
-Os arquivos devem estar na mesma pasta do script:
-
+    <h2>📂 Estrutura Esperada</h2>
+    <pre><code>
 teste_TRE1.csv
 teste_TRE2.csv
 teste_TRE3.csv
-▶️ Como Executar
-1. Instalar dependências
+    </code></pre>
+
+    <h2>▶️ Como Executar</h2>
+    <pre><code>
 pip install pandas
-2. Executar o projeto
 python nome_do_script.py
-3. Menu do sistema
-1 - Concatenar arquivos
-2 - Resumo por municípios
-3 - Top 10 tribunais
-4 - Filtrar município
-0 - Sair
-⚠️ Observações
-Os municípios são normalizados (maiúsculo e sem espaços extras)
-A busca exige correspondência exata, mas sugere resultados similares
-Apenas arquivos teste_TRE*.csv são processados
-Certifique-se de que os CSVs possuem as colunas esperadas
-🛠️ Melhorias Futuras
-Otimização (remoção de .apply() → uso vetorizado)
-Interface gráfica (GUI)
-Exportação para Excel
-Sistema de logs
-Testes automatizados
-👨‍💻 Autor
+    </code></pre>
 
-Projeto desenvolvido para análise de metas jurisdicionais com foco em performance e paralelismo.
+    <h2>⚠️ Observações</h2>
+    <ul>
+        <li>Os municípios são convertidos para maiúsculo</li>
+        <li>Busca com sugestões inteligentes</li>
+        <li>Apenas arquivos <code>teste_TRE*.csv</code> são usados</li>
+    </ul>
 
-Se quiser dar um nível a mais (estilo GitHub top), posso incluir:
+    <h2>🛠️ Melhorias Futuras</h2>
+    <ul>
+        <li>Otimização de performance</li>
+        <li>Interface gráfica</li>
+        <li>Exportação para Excel</li>
+        <li>Logs</li>
+    </ul>
 
-badges (Python, status, etc.)
-GIF de demonstração
-exemplos reais de entrada/saída
-ou até estruturar como projeto open source 👍
+    <h2>👨‍💻 Autor</h2>
+    <p>Projeto desenvolvido para análise de metas jurisdicionais com foco em desempenho.</p>
+
+</div>
+
+</body>
+</html>
