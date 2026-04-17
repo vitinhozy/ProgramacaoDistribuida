@@ -122,19 +122,31 @@ if __name__ == "__main__":
             print("\nProcessando...")
             t0 = time.time(); concatenar_arquivos(arquivos, "serial"); t1 = time.time() - t0
             t0 = time.time(); concatenar_arquivos(arquivos, "paralelo"); t2 = time.time() - t0
-            print(f"> Concluído! Speedup: {t1/t2:.2f}")
+
+            speedup = t1/t2 if t2 > 0 else 0
+            print(f"> Tempo Serial: {t1:.4f}s")
+            print(f"> Tempo Paralelo: {t2:.4f}s")
+            print(f"> Speedup: {speedup:.2f}x")
 
         elif opcao == "2":
             print("\nProcessando...")
             t0 = time.time(); resumo_municipios(df_base, "serial"); t1 = time.time() - t0
             t0 = time.time(); resumo_municipios(df_base, "paralelo"); t2 = time.time() - t0
-            print(f"> Concluído! Speedup: {t1/t2:.2f}")
+
+            speedup = t1/t2 if t2 > 0 else 0
+            print(f"> Tempo Serial: {t1:.4f}s")
+            print(f"> Tempo Paralelo: {t2:.4f}s")
+            print(f"> Speedup: {speedup:.2f}x")
 
         elif opcao == "3":
             print("\nProcessando...")
             t0 = time.time(); top_10_tribunais(df_base, "serial"); t1 = time.time() - t0
             t0 = time.time(); top_10_tribunais(df_base, "paralelo"); t2 = time.time() - t0
-            print(f"> Concluído! Speedup: {t1/t2:.2f}")
+
+            speedup = t1/t2 if t2 > 0 else 0
+            print(f"> Tempo Serial: {t1:.4f}s")
+            print(f"> Tempo Paralelo: {t2:.4f}s")
+            print(f"> Speedup: {speedup:.2f}x")
 
         elif opcao == "4":
             cidade = input("\nDigite o nome do município: ").strip().upper()
@@ -154,7 +166,11 @@ if __name__ == "__main__":
             print(f"A filtrar por '{cidade}'...")
             t0 = time.time(); filtrar_municipio(df_base, cidade, "serial"); t1 = time.time() - t0
             t0 = time.time(); filtrar_municipio(df_base, cidade, "paralelo"); t2 = time.time() - t0
-            print(f"> Concluído! Speedup: {t1/t2:.2f}")
+
+            speedup = t1/t2 if t2 > 0 else 0
+            print(f"> Tempo Serial: {t1:.4f}s")
+            print(f"> Tempo Paralelo: {t2:.4f}s")
+            print(f"> Speedup: {speedup:.2f}x")
 
         elif opcao == "0":
             print("\nA encerrar o sistema...")
